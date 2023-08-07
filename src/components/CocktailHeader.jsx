@@ -1,4 +1,3 @@
-// CocktailHeader.js
 import React from "react";
 
 const CocktailHeader = ({ title, image }) => {

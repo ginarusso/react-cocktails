@@ -1,4 +1,3 @@
-// CocktailDetails.js
 import React from "react";
 
 const CocktailDetails = ({ difficulty, portion, time, description }) => {
