@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import '../styles/styles.css';
-import MethodList from "./MethodList";
+import CocktailHeader from "./CocktailHeader"; // Import CocktailHeader component
+import IngredientsList from "./IngredientsList"; // Import IngredientsList component
+import CocktailDetails from "./CocktailDetails"; // Import CocktailDetails component
 
 const url = 'https://the-cocktail-db3.p.rapidapi.com/45';
 const options = {
@@ -38,28 +40,19 @@ const Card = () => {
     }, []);
   
     return (
-      <div className="container">
-        <div className="card">
-          <h2>{cocktailData.title}</h2>
-          <img className="" src={cocktailData.image} alt={cocktailData.title} />
-          <div className="ingredients">
-            <h4>Ingredients:</h4>
-            <ul>
-              {cocktailData.ingredients &&
-                cocktailData.ingredients.map((ingredient, index) => (
-                  <li key={index}>{ingredient}</li>
-                ))}
-            </ul>
-          </div>
-          <div className="details">
-            <p>Difficulty: {cocktailData.difficulty}</p>
-            <p>Portion: {cocktailData.portion}</p>
-            <p>Time: {cocktailData.time}</p>
-            <p>Description: {cocktailData.description}</p>
+        <div className="container">
+          <div className="card">
+            <CocktailHeader title={cocktailData.title} image={cocktailData.image} /> {/* Use CocktailHeader component */}
+            <IngredientsList ingredients={cocktailData.ingredients} /> {/* Use IngredientsList component */}
+            <CocktailDetails
+              difficulty={cocktailData.difficulty}
+              portion={cocktailData.portion}
+              time={cocktailData.time}
+              description={cocktailData.description}
+            /> 
           </div>
         </div>
-      </div>
-    );
+      );
   }
   
   export default Card;
