@@ -1,0 +1,165 @@
+body {
+    font-family: 'Homemade Apple', cursive;
+    margin: 1rem auto;
+    max-width: 750px;
+    background: #D3D3D3;
+    /* background-image: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.5)), url('images/breakfast.jpg');
+    background-size: cover;
+    background-repeat: no-repeat; */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  
+  }
+  
+  h2 {
+    background: rgb(2,0,36);
+    background: rgb(67,67,69);
+    background: linear-gradient(90deg, rgba(67,67,69,1) 0%, rgba(57,57,60,1) 71%, rgba(57,56,55,0.8646052170868348) 100%, rgba(117,116,115,1) 100%);
+    color: white;
+    padding: 1.5rem 1rem 1rem;
+    line-height: 2rem;
+  } 
+  
+  h2,
+  h4 {
+     text-align: center;
+     margin-top: 1rem;
+  }
+  
+  h4 {
+    text-decoration: underline;
+    font-size: 1.5rem;
+    margin-bottom: 0;
+  }
+  hr {
+    border-top: 1px dashed #CCCCC4;
+  }
+  
+  span {
+    display: none;
+  }
+  
+  li {
+    line-height: 2rem;
+    font-size: 1.25rem;
+    /* list-style-type: none; */
+  }
+  
+p {
+  margin: .5em;
+}
+
+  .img-hero {
+    margin: 0 0.625rem;
+    border-radius: 1.25rem;
+    margin-bottom: .5rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border: 1px dashed #CCCCC4;
+    /* width: 80%; */
+    height: 400px;
+    margin: 0 auto;
+  }
+  
+  .smImg {
+    width: 90%;
+    margin-left: 0.625rem;
+    border-radius: 0.625rem; 
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    border-radius: 0.625rem;
+    margin: 0 0 1rem 0;
+    padding-top: .5rem;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .directions {
+    display: grid;
+    background-color: #F3F3EC;
+    padding: 0 1rem;
+    line-height: 1.5rem;
+    font-size: 0.875rem;
+    letter-spacing: 0.094rem;
+    border: 1px dashed #CCCCC4;
+  }
+  
+  .ingredients {
+  grid-column: 1 / span 1;
+  grid-row: 1;
+  }
+  
+  .recipeImg {
+  grid-column: 1 / span 1;
+  grid-row: 2;
+  
+  }
+  
+  .recipeDirect {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  border-left: 1px dashed #CCCCC4;
+  padding: 0 0.938rem;
+  }
+  
+  footer {
+    padding-left: 0.625rem;
+    font-size: 0.625rem;
+    margin: 0 0 0.625rem 0;
+  }
+  
+  /* @media (max-width: 500px) {
+    .directions {
+      display: block;
+    }
+  } */
+  
+  @media screen and (max-width: 650px) {
+    /* body {
+        background-image: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.5)), url('images/breakfast.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+    } */
+    
+    h2 {
+        font-size: 1.25rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        line-height: 1.5rem;
+    }
+  
+    .container {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 1rem;
+    }
+    
+    .ingredients {
+        border: none;
+    }
+  
+    .directions {
+      display: block;
+    }
+    
+    .recipeDirect {
+        padding: 0 0.625rem;
+        border: none;
+    }
+    .img-hero {
+      width: 100%;
+    }
+    
+    .smImg {
+        display: block;
+        margin: 0 auto;
+        width: 50%;
+    }
+  }
+  
