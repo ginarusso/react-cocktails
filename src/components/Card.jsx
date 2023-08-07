@@ -2,61 +2,50 @@ import React, { useState, useEffect } from "react";
 import '../styles/styles.css';
 import CocktailHeader from "./CocktailHeader"; 
 import IngredientsList from "./IngredientsList";
-import CocktailDetails from "./CocktailDetails"
+import CocktailDetails from "./CocktailDetails";
 import CocktailMethod from "./CocktailMethod";
 
-const url = 'https://the-cocktail-db3.p.rapidapi.com/1';
-const options = {
-	method: 'GET',
-	headers: {
-		'X-RapidAPI-Key': '', //add your API Key here
-		'X-RapidAPI-Host': 'the-cocktail-db3.p.rapidapi.com'
-	}
-};
+const Card = () => {
+  const [cocktails, setCocktails] = useState([]);
 
-try {
-	const response = await fetch(url, options);
-	const result = await response.text();
-	console.log(result);
-} catch (error) {
-	console.error(error);
+  useEffect(() => {
+    const fetchCocktails = async () => {
+      try {
+        const response = await fetch('https://the-cocktail-db3.p.rapidapi.com', {
+          method: 'GET',
+          headers: {
+            'X-RapidAPI-Key': '67717c6850msh99160644e11a937p125aedjsn15fa29cfa544',
+            'X-RapidAPI-Host': 'the-cocktail-db3.p.rapidapi.com'
+          }
+        });
+        const data = await response.json();
+        setCocktails(data);
+        console.log(data)
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchCocktails();
+  }, []);
+
+  return (
+    <div className="container">
+      {cocktails.map(cocktailData => (
+        <div className="card" key={cocktailData.id}>
+          <CocktailHeader title={cocktailData.title} image={cocktailData.image} /> 
+          <IngredientsList ingredients={cocktailData.ingredients} /> 
+          <CocktailDetails
+            difficulty={cocktailData.difficulty}
+            portion={cocktailData.portion}
+            time={cocktailData.time}
+            description={cocktailData.description}
+          /> 
+          <CocktailMethod method={cocktailData.method || []} />
+        </div>
+      ))}
+    </div>
+  );
 }
 
-const Card = () => {
-    const [cocktailData, setCocktailData] = useState({});
-  
-    useEffect(() => {
-      const fetchCocktail = async () => {
-        try {
-          const response = await fetch(url, options);
-          const result = await response.json();
-          console.log(result); // Log the fetched data to the console
-          setCocktailData(result);
-        } catch (error) {
-          console.error(error);
-        }
-      };
-  
-      fetchCocktail();
-    }, []);
-  
-    return (
-        <div className="container">
-          <div className="card">
-            <CocktailHeader title={cocktailData.title} image={cocktailData.image} /> 
-            <IngredientsList ingredients={cocktailData.ingredients} /> 
-            <CocktailDetails
-              difficulty={cocktailData.difficulty}
-              portion={cocktailData.portion}
-              time={cocktailData.time}
-              description={cocktailData.description}
-            /> 
-           <CocktailMethod method={cocktailData.method || []} />
-
-
-          </div>
-        </div>
-      );
-  }
-  
-  export default Card;
+export default Card;

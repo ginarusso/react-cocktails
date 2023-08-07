@@ -48,6 +48,10 @@ p {
   margin: .5em;
 }
 
+.center {
+  display: flex;
+  flex-direction: column;
+}
   .img-hero {
     margin: 0 0.625rem;
     border-radius: 1.25rem;
