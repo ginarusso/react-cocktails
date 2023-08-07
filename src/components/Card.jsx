@@ -9,7 +9,7 @@ const url = 'https://the-cocktail-db3.p.rapidapi.com/1';
 const options = {
 	method: 'GET',
 	headers: {
-		'X-RapidAPI-Key': '',
+		'X-RapidAPI-Key': '', //add your API Key here
 		'X-RapidAPI-Host': 'the-cocktail-db3.p.rapidapi.com'
 	}
 };
