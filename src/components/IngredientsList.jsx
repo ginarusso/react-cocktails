@@ -1,7 +1,7 @@
 import React from "react";
 
 const IngredientsList = ({ ingredients }) => {
-    console.log(ingredients)
+    // console.log(ingredients)
   if (!ingredients || ingredients.length === 0) {
     return <div className="ingredients">No ingredients available.</div>;
   }
