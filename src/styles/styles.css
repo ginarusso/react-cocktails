@@ -41,6 +41,7 @@ body {
   li {
     line-height: 2rem;
     font-size: 1.25rem;
+    padding-right: 1em;
     /* list-style-type: none; */
   }
   
@@ -75,7 +76,7 @@ p {
     flex-direction: column;
     background: #ffffff;
     border-radius: 0.625rem;
-    margin: 0 0 1rem 0;
+    /* margin: 0 0 1rem 0; */
     padding-top: .5rem;
   }
 
@@ -142,6 +143,7 @@ p {
         display: flex;
         flex-direction: column;
         margin-bottom: 1rem;
+        padding: 0;
     }
     
     .ingredients {
@@ -157,7 +159,8 @@ p {
         border: none;
     }
     .img-hero {
-      width: 100%;
+      max-width: 80%;
+      height: 50%;
     }
     
     .smImg {
