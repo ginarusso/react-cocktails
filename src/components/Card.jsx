@@ -5,7 +5,7 @@ import IngredientsList from "./IngredientsList";
 import CocktailDetails from "./CocktailDetails";
 import CocktailMethod from "./CocktailMethod";
 
-require('dotenv').config();
+// require('dotenv').config();
 
 const Card = () => {
   const [cocktails, setCocktails] = useState([]);
@@ -16,7 +16,7 @@ const Card = () => {
         const response = await fetch('https://the-cocktail-db3.p.rapidapi.com', {
           method: 'GET',
           headers: {
-            'X-RapidAPI-Key': process.env.API_KEY,
+            'X-RapidAPI-Key': '',
             'X-RapidAPI-Host': 'the-cocktail-db3.p.rapidapi.com'
           }
         });
@@ -30,7 +30,7 @@ const Card = () => {
           const cocktailResponse = await fetch(`https://the-cocktail-db3.p.rapidapi.com/${id}`, {
             method: 'GET',
             headers: {
-              'X-RapidAPI-Key': process.env.API_KEY,
+              'X-RapidAPI-Key': '',
               'X-RapidAPI-Host': 'the-cocktail-db3.p.rapidapi.com'
             }
           });
