@@ -14,7 +14,7 @@ const Card = () => {
         const response = await fetch('https://the-cocktail-db3.p.rapidapi.com', {
           method: 'GET',
           headers: {
-            'X-RapidAPI-Key': '',
+            'X-RapidAPI-Key': '67717c6850msh99160644e11a937p125aedjsn15fa29cfa544',
             'X-RapidAPI-Host': 'the-cocktail-db3.p.rapidapi.com'
           }
         });
@@ -28,7 +28,7 @@ const Card = () => {
           const cocktailResponse = await fetch(`https://the-cocktail-db3.p.rapidapi.com/${id}`, {
             method: 'GET',
             headers: {
-              'X-RapidAPI-Key': '',
+              'X-RapidAPI-Key': '67717c6850msh99160644e11a937p125aedjsn15fa29cfa544',
               'X-RapidAPI-Host': 'the-cocktail-db3.p.rapidapi.com'
             }
           });
