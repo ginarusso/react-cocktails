@@ -116,6 +116,7 @@ const Card = () => {
     setSearchResults(results);
     setShowInitialImage(false);
     setNoResultsFound(results.length === 0);
+    setSearchInput('');
   };
 
   return (
