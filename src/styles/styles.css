@@ -9,11 +9,16 @@ body {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   
   }
+
+  input {
+    margin: 1em;
+  }
   
   h2 {
-    background: rgb(2,0,36);
-    background: rgb(67,67,69);
-    background: linear-gradient(90deg, rgba(67,67,69,1) 0%, rgba(57,57,60,1) 71%, rgba(57,56,55,0.8646052170868348) 100%, rgba(117,116,115,1) 100%);
+    background: #000000;
+    /* background: rgb(2,0,36); */
+    /* background: rgb(67,67,69); */
+    /* background: linear-gradient(90deg, rgba(67,67,69,1) 0%, rgba(57,57,60,1) 71%, rgba(57,56,55,0.8646052170868348) 100%, rgba(117,116,115,1) 100%); */
     color: white;
     padding: 1.5rem 1rem 1rem;
     line-height: 2rem;
@@ -54,14 +59,14 @@ p {
   flex-direction: column;
 }
   .img-hero {
-    margin: 0 0.625rem;
-    border-radius: 1.25rem;
-    margin-bottom: .5rem;
+    margin: 0 0.625em;
+    border-radius: 1.25em;
+    /* margin-bottom: .5em; */
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border: 1px dashed #CCCCC4;
     /* width: 80%; */
     height: 400px;
-    margin: 0 auto;
+    margin: 0 auto 1.5em;
   }
   
   .smImg {
@@ -90,7 +95,7 @@ p {
     background-color: #F3F3EC;
     padding: 0 1rem;
     line-height: 1.5rem;
-    font-size: 0.875rem;
+    font-size: 1rem;
     letter-spacing: 0.094rem;
     border: 1px dashed #CCCCC4;
   }
@@ -138,6 +143,10 @@ p {
         padding-right: 1rem;
         line-height: 1.5rem;
     }
+
+    li {
+      font-size: 1rem;
+    }
   
     .container {
         display: flex;
@@ -152,6 +161,8 @@ p {
   
     .directions {
       display: block;
+      padding: 1em;
+      font-size: .9rem;
     }
     
     .recipeDirect {

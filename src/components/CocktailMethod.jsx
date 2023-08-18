@@ -2,7 +2,7 @@ import React from "react";
 
 const CocktailMethod = ({ method }) => {
   return (
-    <div className="method container">
+    <div className="method">
       <h4>Directions</h4>
       <ol>
         {method.map((stepObj, index) => {
