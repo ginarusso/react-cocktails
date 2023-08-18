@@ -12,7 +12,7 @@ body {
   input, button {
     padding: 1em;
     text-align: center;
-    /* margin-left: 1em; */
+    margin-left: 1em;
     font-weight: bold;
     color: gray;
   }
@@ -66,6 +66,10 @@ body {
   display: inline-block;
   font-size: 1rem;
   margin: 0;
+}
+
+.inline {
+  text-align: center;
 }
 
 form {
