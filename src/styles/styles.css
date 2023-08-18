@@ -9,6 +9,24 @@ body {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
 
+  input, button {
+    padding: 1em;
+    text-align: center;
+    margin-left: 1em;
+    font-weight: bold;
+    color: gray;
+  }
+
+  button {
+    width: 184px;
+  }
+
+  button:hover {
+    cursor: pointer;
+    background: maroon;
+    color: white;
+  }
+
   video {
     /** Simulationg background-size: cover */
     object-fit: cover;
@@ -52,6 +70,11 @@ body {
 
 form {
   margin: 0;
+  width: 30%;
+}
+
+button {
+
 }
 
   input {
@@ -182,6 +205,37 @@ p {
         background-repeat: no-repeat;
     } */
     
+    .search-form {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      align-items: center;
+    }
+
+    input, button {
+      padding: 1em;
+      text-align: center;
+      margin: 1em;
+      font-weight: bold;
+      color: gray;
+    }
+
+    button {
+      margin: 0 auto;
+    }
+
+    button:hover {
+      cursor: pointer;
+      background: maroon;
+      color: white;
+    }
+
+   form {
+      display: flex;
+      flex-direction: column;
+      width: 50%;
+    }
+
     h2 {
         font-size: 1.25rem;
         padding-left: 1rem;

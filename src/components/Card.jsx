@@ -120,7 +120,7 @@ const Card = () => {
 
   return (
     <>
-   <div class="video-wrapper">
+   <div className="video-wrapper">
    <video className="background" src={videoBG} autoPlay loop muted></video>
 </div>
     <div className="container">
