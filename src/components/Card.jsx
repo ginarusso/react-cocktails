@@ -97,14 +97,14 @@ const Card = () => {
   const [noResultsFound, setNoResultsFound] = useState(false);
 
   useEffect(() => {
-    // use the provided cocktailList data
+    // use the provided cocktailList data to update the DOM
     setCocktails(cocktailList);
   }, []);
 
   const handleSearch = (e) => {
     e.preventDefault();
 
-    // perform the search logic here
+    // search logic
     const results = detailedCocktailRecipe.filter(recipe =>
       recipe.ingredients.some(ingredient =>
         ingredient.toLowerCase().includes(searchInput.toLowerCase())
@@ -128,6 +128,15 @@ const Card = () => {
           />
           <button type="submit">Search</button>
         </form>
+        <ul className="inline">
+          <li>Vodka</li>
+          <li>Cognac</li>
+          <li>Gin</li>
+          <li>Proseco</li>
+          <li>Whiskey</li>
+          <li>Mezcal</li>
+          <li>Brandy</li>
+        </ul>
       </div>
       {showInitialImage && (
         <div className="card">

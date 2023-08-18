@@ -10,6 +10,20 @@ body {
   
   }
 
+.search-form {
+  display: flex;
+}
+
+.inline li {
+  display: inline-block;
+  font-size: 1rem;
+  margin: 0;
+}
+
+form {
+  margin: 0;
+}
+
   input {
     margin: 1em;
   }
@@ -88,6 +102,7 @@ p {
   .card {
     display: flex;
     flex-direction: column;
+    margin: 0;
   }
   
   .directions {
