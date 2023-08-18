@@ -4,6 +4,8 @@ import CocktailHeader from "./CocktailHeader";
 import IngredientsList from "./IngredientsList";
 import CocktailDetails from "./CocktailDetails";
 import CocktailMethod from "./CocktailMethod";
+// import videoBG from "../images/cocktails.mp4";
+import videoBG from "../images/bar_banner_vid.mp4";
 
 // const Card = () => {
 //   const [cocktails, setCocktails] = useState([]);
@@ -117,6 +119,10 @@ const Card = () => {
   };
 
   return (
+    <>
+   <div class="video-wrapper">
+   <video className="background" src={videoBG} autoPlay loop muted></video>
+</div>
     <div className="container">
       <div className="search-form">
         <form onSubmit={handleSearch}>
@@ -124,15 +130,14 @@ const Card = () => {
             type="text"
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
-            placeholder="Search by ingredient"
-          />
+            placeholder="Search by ingredient"/>
           <button type="submit">Search</button>
         </form>
         <ul className="inline">
           <li>Vodka</li>
           <li>Cognac</li>
           <li>Gin</li>
-          <li>Proseco</li>
+          <li>Prosecco</li>
           <li>Whiskey</li>
           <li>Mezcal</li>
           <li>Brandy</li>
@@ -157,6 +162,7 @@ const Card = () => {
         </div>
       ))}
     </div>
+    </>
   );
 }
 
