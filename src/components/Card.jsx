@@ -7,6 +7,8 @@ import CocktailMethod from "./CocktailMethod";
 // import videoBG from "../images/cocktails.mp4";
 import videoBG from "../images/bar_banner_vid.mp4";
 import { cocktailList, detailedCocktailRecipe } from "../data.js";
+import spiritData from "../spiritsData";
+
 
 
 // const Card = () => {
@@ -61,6 +63,7 @@ const Card = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [showInitialImage, setShowInitialImage] = useState(true);
   const [noResultsFound, setNoResultsFound] = useState(false);
+  const [visibleSpirit, setVisibleSpirit] = useState(null);
 
   useEffect(() => {
     // use the provided cocktailList data to update the DOM
@@ -86,6 +89,16 @@ const Card = () => {
     setSearchInput('');
   };
 
+  const toggleSpirit = (spiritName) => {
+    if (visibleSpirit === spiritName) {
+      // Clicking on the same spirit hides it
+      setVisibleSpirit(null);
+    } else {
+      // Clicking on a different spirit shows it and hides the previous one
+      setVisibleSpirit(spiritName);
+    }
+  };
+
   return (
     <>
    <div className="video-wrapper">
@@ -94,22 +107,35 @@ const Card = () => {
     <div className="container">
       <div className="search-form">
         <form onSubmit={handleSearch}>
+        <ul className="spirit-list">
+              {spiritData.map((spirit, index) => (
+                <li key={index}>
+                  <p
+                    className={`spirit-name ${visibleSpirit === spirit.name ? 'active' : ''}`}
+                    onClick={() => toggleSpirit(spirit.name)}
+                  >
+                    {spirit.name}
+                  </p>
+                  <ul
+                    id={`${spirit.name.toLowerCase()}-list`}
+                    className={visibleSpirit === spirit.name ? "" : "hidden"}
+                  >
+                    {spirit.description.map((item, itemIndex) => (
+                      <li key={itemIndex}>{item}</li>
+                    ))}
+                  </ul>
+                </li>
+              ))}
+            </ul>
+<div>
           <input
             type="text"
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
             placeholder="Search by liquor"/>
           <button type="submit">Search</button>
+</div>
         </form>
-        <ul className="inline">
-          <li>Vodka</li>
-          <li>Cognac</li>
-          <li>Gin</li>
-          <li>Prosecco</li>
-          <li>Whiskey</li>
-          <li>Mezcal</li>
-          <li>Brandy</li>
-        </ul>
       </div>
       {showInitialImage && (
         <div className="card">
