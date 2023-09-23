@@ -1,7 +1,7 @@
 body {
   font-family: 'Homemade Apple', cursive;
   margin: 1rem auto;
-  max-width: 750px;
+  max-width: 900px;
   background: #D3D3D3;
   /* background-image: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.5)), url('images/breakfast.jpg');
   background-size: cover;
@@ -15,6 +15,7 @@ input, button {
   margin-left: 1em;
   font-weight: bold;
   color: gray;
+  width: 200px;
 }
 
 button {
@@ -180,6 +181,7 @@ flex-direction: column;
 .container {
   display: flex;
   flex-direction: column;
+  /* flex-direction: row-reverse; */
   background: #ffffff;
   border-radius: 0.625rem;
   /* margin: 0 0 1rem 0; */
@@ -258,7 +260,7 @@ footer {
     /* margin: 1em; */
     font-weight: bold;
     color: gray;
-    width: 90%;
+    /* width: 90%; */
   }
 
   /* button {

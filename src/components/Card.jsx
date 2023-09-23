@@ -107,7 +107,7 @@ const Card = () => {
     <div className="container">
       <div className="search-form">
         <form onSubmit={handleSearch}>
-        <ul className="spirit-list">
+        {/* <ul className="spirit-list">
               {spiritData.map((spirit, index) => (
                 <li key={index}>
                   <p
@@ -126,13 +126,13 @@ const Card = () => {
                   </ul>
                 </li>
               ))}
-            </ul>
+            </ul> */}
 <div>
           <input
             type="text"
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
-            placeholder="Search by liquor"/>
+            placeholder="Search by liquor or ingredient"/>
           <button type="submit">Search</button>
 </div>
         </form>
