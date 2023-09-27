@@ -9,6 +9,31 @@ body {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+nav {
+  background-color: black;
+}
+
+a {
+  color: white;
+}
+
+a:hover {
+  cursor: pointer;
+  color: orange;
+}
+
+.nav-ul {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 30px;
+}
+
+.nav li {
+  list-style-type: none;
+  line-height: 2rem;
+  font-size: 1.25rem;
+}
+
 input, button {
   padding: 1em;
   text-align: center;
@@ -145,12 +170,11 @@ span {
   display: none;
 }
 
-li {
+/* li {
   line-height: 2rem;
-  font-size: 1.25rem;
-  padding-right: 1em;
+  font-size: 1.25rem; */
   /* list-style-type: none; */
-}
+/* } */
 
 p {
 margin: .5em;

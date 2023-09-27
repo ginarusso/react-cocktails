@@ -1,73 +1,32 @@
 import React, { useState, useEffect } from "react";
 import '../styles/styles.css';
-import CocktailHeader from "./CocktailHeader"; 
-import IngredientsList from "./IngredientsList";
-import CocktailDetails from "./CocktailDetails";
-import CocktailMethod from "./CocktailMethod";
+import CocktailHeader from "../components/CocktailHeader"; 
+import IngredientsList from "../components/IngredientsList";
+import CocktailDetails from "../components/CocktailDetails";
+import CocktailMethod from "../components/CocktailMethod";
 // import videoBG from "../images/cocktails.mp4";
 import videoBG from "../images/bar_banner_vid.mp4";
 import { cocktailList, detailedCocktailRecipe } from "../data.js";
-import spiritData from "../spiritsData";
+// import spiritData from "../spiritsData";
 
+import apiConn from "../api/connect"
 
-
-// const Card = () => {
-//   const [cocktails, setCocktails] = useState([]);
-
-  // useEffect(() => {
-  //   const fetchCocktails = async () => {
-  //     try {
-  //       const response = await fetch('https://the-cocktail-db3.p.rapidapi.com', {
-  //         method: 'GET',
-  //         headers: {
-  //           'X-RapidAPI-Key': '',
-  //           'X-RapidAPI-Host': 'the-cocktail-db3.p.rapidapi.com'
-  //         }
-  //       });
-  //       const data = await response.json();
-
-  //       // Extracting cocktail IDs from the response
-  //       const cocktailIds = data.map(cocktail => cocktail.id);
-
-  //       // Fetch details for each cocktail based on its ID
-  //       const cocktailDetailsPromises = cocktailIds.map(async id => {
-  //         const cocktailResponse = await fetch(`https://the-cocktail-db3.p.rapidapi.com/${id}`, {
-  //           method: 'GET',
-  //           headers: {
-  //             'X-RapidAPI-Key': '',
-  //             'X-RapidAPI-Host': 'the-cocktail-db3.p.rapidapi.com'
-  //           }
-  //         });
-  //         return cocktailResponse.json();
-  //       });
-
-  //       // Wait for all promises to resolve
-  //       const cocktailDetails = await Promise.all(cocktailDetailsPromises);
-
-  //       setCocktails(cocktailDetails);
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   };
-
-  //   fetchCocktails();
-  // }, []);
+const initialCocktailImage = "https://cdn.pixabay.com/photo/2014/03/24/17/07/pineapple-juice-295078_1280.png";
+const emptyCocktailGlassImage = "https://cdn.pixabay.com/photo/2014/12/12/22/08/glass-565914_1280.jpg";
   
-  const initialCocktailImage = "https://cdn.pixabay.com/photo/2014/03/24/17/07/pineapple-juice-295078_1280.png";
-  const emptyCocktailGlassImage = "https://cdn.pixabay.com/photo/2014/12/12/22/08/glass-565914_1280.jpg";
-  
-
-const Card = () => {
+const RecipeCard = () => {
   const [cocktails, setCocktails] = useState([]);
   const [searchInput, setSearchInput] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [showInitialImage, setShowInitialImage] = useState(true);
   const [noResultsFound, setNoResultsFound] = useState(false);
-  const [visibleSpirit, setVisibleSpirit] = useState(null);
+//   const [visibleSpirit, setVisibleSpirit] = useState(null);
+  const [data, setData] = useState([])
 
   useEffect(() => {
     // use the provided cocktailList data to update the DOM
     setCocktails(cocktailList);
+    getData()
   }, []);
 
   const handleSearch = (e) => {
@@ -89,18 +48,34 @@ const Card = () => {
     setSearchInput('');
   };
 
-  const toggleSpirit = (spiritName) => {
-    if (visibleSpirit === spiritName) {
-      // Clicking on the same spirit hides it
-      setVisibleSpirit(null);
-    } else {
-      // Clicking on a different spirit shows it and hides the previous one
-      setVisibleSpirit(spiritName);
-    }
-  };
+  function getData(){
+    apiConn.get('/cocktail')
+    // apiConn.get('/alcohol')
+    .then(res => {
+      setData(res.data)
+      console.log(res.data[0])
+    })
+    .catch(error => {
+      console.log(error)
+    })
+  }
+
+//   const toggleSpirit = (spiritName) => {
+//     if (visibleSpirit === spiritName) {
+//       // Clicking on the same spirit hides it
+//       setVisibleSpirit(null);
+//     } else {
+//       // Clicking on a different spirit shows it and hides the previous one
+//       setVisibleSpirit(spiritName);
+//     }
+//   };
 
   return (
     <>
+        {data.map(cocktail => {
+      return  <div>{cocktail.category}</div>
+    })}
+
    <div className="video-wrapper">
    <video className="background" src={videoBG} autoPlay loop muted></video>
   </div>
@@ -160,4 +135,4 @@ const Card = () => {
   );
 }
 
-export default Card;
+export default RecipeCard;

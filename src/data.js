@@ -1,3 +1,5 @@
+
+
 export const cocktailList = [
     {"id":"1","title":"Nutella and cognac coffee cocktail","difficulty":"Easy","image":"https://apipics.s3.amazonaws.com/coctails_api/1.jpg"},
     {"id":"2","title":"Easy rhubarb cordial","difficulty":"Easy","image":"https://apipics.s3.amazonaws.com/coctails_api/2.jpg"},
@@ -8,6 +10,9 @@ export const cocktailList = [
     {"id":"7","title":"Umibozu yuzu cocktail","difficulty":"Easy","image":"https://apipics.s3.amazonaws.com/coctails_api/7.jpg"},
     {"id":"45","title":"Aperol spritz","difficulty":"Easy","image":"https://apipics.s3.amazonaws.com/coctails_api/45.jpg"}
 ];
+
+export const test = []
+
   
 export const detailedCocktailRecipe = [
     {

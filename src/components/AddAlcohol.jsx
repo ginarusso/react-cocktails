@@ -23,9 +23,6 @@ function handleOnSubmit(e) {
 
 return (
     <>
-    <hr />
-    <h2>Component to add alcohol</h2>
-
     <form onSubmit={handleOnSubmit}>
         <input type="text"
         placeholder="Alcohol Name"

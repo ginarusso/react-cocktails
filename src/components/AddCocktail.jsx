@@ -39,9 +39,6 @@ function handleOnSubmit(e) {
 
 return (
     <>
-    <hr />
-    <h2>Component to add a cocktail</h2>
-
     <form onSubmit={handleOnSubmit}>
         <input type="text"
         placeholder="Cocktail Name"
@@ -100,7 +97,7 @@ return (
         required
         />
         {/* separate textarea input fields for ingredients and method, allowing you to enter multiple items separated by newlines. The handleArrayChange function splits the input by newlines and updates the corresponding array in the cocktail state. */}
-        <textarea
+        {/* <textarea
           name="ingredients"
           placeholder="Ingredients (one per line)"
           value={cocktail.ingredients.join('\n')}
@@ -113,7 +110,7 @@ return (
           value={cocktail.method.join('\n')}
           onChange={(e) => handleArrayChange(e, 'method')}
           required
-        />
+        /> */}
         {/* <input type="text"
         placeholder="ingredients"
         value={cocktail.ingredients}
