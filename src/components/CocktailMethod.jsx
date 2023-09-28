@@ -7,7 +7,7 @@ const CocktailMethod = ({ method }) => {
       <ol>
       {/* Object.values(stepObj)[0] extracts the value associated with the first key (there's only one) in the stepObj object. This value is the description of a step. */}
         {method.map((stepObj, index) => {
-          const stepDescription = Object.values(stepObj)[0];
+          const stepDescription = Object.values(stepObj);
           return <li key={index}>{stepDescription}</li>;
         })}
       </ol>
