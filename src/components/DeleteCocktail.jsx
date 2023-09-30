@@ -1,17 +1,18 @@
+// import React, {useState, useEffect} from 'react'
 import React from 'react'
+// import { useNavigate } from 'react-router-dom';
 
-const DeleteCocktail = ({id, deleteCocktail}) => {
-    function handleDelete(e) {
-        deleteCocktail(id)
-    }
-    return (
-        <>
+const DeleteCocktail = ({id, deleteCocktailData, setSearchResults}) => {
+    // const navigate = useNavigate()
+    
+    function handleDelete() {
+        deleteCocktailData(id)
+        setSearchResults([])
+      }
+
+      return (
         <button onClick={handleDelete}>Delete Cocktail</button>
-        </>
-    )
-}
+      );
+    };
 
 export default DeleteCocktail
-
-
-// when a cocktail is deleted, the alcohol shouldn't be deleted from the database

@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import apiConn from "../api/connect"
 
 const AddAlcohol = ({addAlcohols}) => {
     const [alcohol, setAlcohol] = useState({
@@ -12,9 +13,15 @@ function  handleName(e) {
     })
 }
 
-function handleOnSubmit(e) {
+async function handleOnSubmit(e) {
     e.preventDefault()
-    addAlcohols(alcohol)
+        apiConn.post('/alcohol', alcohol)
+        .then(res => {
+            console.log(res)
+        })
+        .catch(error => {
+            console.log(error)
+        })
     setAlcohol({
         alcohol_name: "",
         brand: ""

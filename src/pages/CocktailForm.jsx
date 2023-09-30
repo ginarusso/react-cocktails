@@ -1,11 +1,32 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
 import AddCocktail from '../components/AddCocktail'
+import DeleteCocktail from '../components/DeleteCocktail'
+import apiConn from "../api/connect"
 
 const CocktailForm = () => {
-  return (
+    const [data, setData] = useState([])
+    useEffect(() => {
+        getCocktailData()
+      }, []);
+    function getCocktailData(){
+        apiConn.get('/cocktail')
+        .then(res => {
+          setData(res.data)
+          console.log(res.data)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+      }
+    return (
     <>
-    <h2>Add Cocktail</h2>
+    <h1>List of Cocktails</h1>
+{data.map(cocktail => {
+    return <div key={cocktail.id}>{cocktail.cocktail_name} {cocktail.id}</div>
+})}
+
     <AddCocktail />
+
     </>
   )
 }

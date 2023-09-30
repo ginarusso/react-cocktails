@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import apiConn from "../api/connect"
 
 const AddCocktail = ({addCocktails}) => {
     const [cocktail, setCocktail] = useState({
@@ -20,9 +21,15 @@ function  handleName(e) {
     })
 }
 
-function handleOnSubmit(e) {
+async function handleOnSubmit(e) {
     e.preventDefault()
-    addCocktails(cocktail)
+        apiConn.post('/cocktail', cocktail)
+        .then(res => {
+            console.log(res)
+        })
+        .catch(error => {
+            console.log(error)
+        })
     setCocktail({
         cocktail_name: "",
         difficulty: "",
@@ -39,6 +46,7 @@ function handleOnSubmit(e) {
 
 return (
     <>
+    <h2>Add a Cocktail</h2>
     <form onSubmit={handleOnSubmit}>
         <input type="text"
         placeholder="Cocktail Name"
@@ -141,7 +149,7 @@ return (
         }}
         required
         />
-        <input type="text"
+        <input type="number"
         placeholder="alcohol ID"
         value={cocktail.alcohol_id}
         onChange={e => {
@@ -151,15 +159,11 @@ return (
         }}
         required
         />
-        <button>Add Cocktail</button>
+        <button type="submit">Add Cocktail</button>
     </form>
+
     </>
     )
 }
 
 export default AddCocktail
-
-
-
-
-

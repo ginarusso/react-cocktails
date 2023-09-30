@@ -3,6 +3,8 @@ import React from 'react'
 const Alcohol = ({alcohol}) => {
     return (
         <>
+    {/* <DeleteAlcohol /> */}
+    <EditAlcohol />
         {alcohol.map(alcoholName => {
             const {id, alcohol_name, brand} = alcoholName
             return (

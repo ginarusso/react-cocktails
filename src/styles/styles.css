@@ -1,3 +1,7 @@
+html {
+  max-height: 100vh;
+}
+
 body {
   font-family: 'Homemade Apple', cursive;
   margin: 1rem auto;
@@ -41,6 +45,10 @@ input, button {
   font-weight: bold;
   color: gray;
   width: 200px;
+}
+
+label {
+  padding-top: 1em;
 }
 
 button {
@@ -113,7 +121,6 @@ video {
   text-decoration: underline;
 }
 
-
 .search-form {
 display: flex;
 }
@@ -184,6 +191,7 @@ margin: .5em;
 display: flex;
 flex-direction: column;
 }
+
 .img-hero {
   margin: 0 0.625em;
   border-radius: 1.25em;
@@ -191,7 +199,8 @@ flex-direction: column;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border: 1px dashed #CCCCC4;
   /* width: 80%; */
-  height: 400px;
+  height: 300px;
+  /* height: 25vh; */
   margin: 0 auto 1.5em;
 }
 
@@ -275,6 +284,12 @@ footer {
     display: flex;
     flex-direction: column;
     width: 100%;
+    align-items: center;
+  }
+
+  .flexSearch {
+    display: flex;
+    flex-direction: column;
     align-items: center;
   }
 

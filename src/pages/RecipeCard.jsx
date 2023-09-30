@@ -5,9 +5,11 @@ import IngredientsList from "../components/IngredientsList";
 import CocktailDetails from "../components/CocktailDetails";
 import CocktailMethod from "../components/CocktailMethod";
 import videoBG from "../images/bar_banner_vid.mp4";
+
 // import spiritData from "../spiritsData";
 
 import apiConn from "../api/connect"
+import DeleteCocktail from "../components/DeleteCocktail";
 
 const initialCocktailImage = "https://cdn.pixabay.com/photo/2014/03/24/17/07/pineapple-juice-295078_1280.png";
 const emptyCocktailGlassImage = "https://cdn.pixabay.com/photo/2014/12/12/22/08/glass-565914_1280.jpg";
@@ -20,9 +22,11 @@ const RecipeCard = () => {
 //   const [visibleSpirit, setVisibleSpirit] = useState(null);
   const [data, setData] = useState([])
   const [searchMade, setSearchMade] = useState(false);
+  const [cocktailDeleted, setCocktailDeleted] = useState(false);
+
 
   useEffect(() => {
-    getData()
+    getCocktailData()
   }, []);
 
   const handleSearch = (e) => {
@@ -41,25 +45,24 @@ const RecipeCard = () => {
   
     setSearchResults(results);
     setShowInitialImage(false);
-    setNoResultsFound(results.length === 0);
+    // setNoResultsFound(results.length === 0);
     setSearchInput('');
     setSearchMade(true);
 
-    setNoResultsFound(results.length === 0); // Set noResultsFound to true if no results are found
+    setNoResultsFound(false)
+    // setNoResultsFound(results.length === 0); // Set noResultsFound to true if no results are found
 
     if (results.length === 0) {
       setShowInitialImage(true); // Set showInitialImage to true if no results are found
     } else {
       setShowInitialImage(false);
     }
-    setSearchResults(results);
-    setSearchInput('');
-    setSearchMade(true); // Set searchMade to true when search is made
+    
   };
 
-  function getData(){
+  function getCocktailData(){
     apiConn.get('/cocktail')
-    // apiConn.get('/alcohol')
+
     .then(res => {
       setData(res.data)
       console.log(res.data)
@@ -67,6 +70,20 @@ const RecipeCard = () => {
     .catch(error => {
       console.log(error)
     })
+  }
+
+  function deleteCocktailData(id) {
+    apiConn
+    .delete(`/cocktail/${id}`)
+    .then(res => {
+      console.log(`Cocktail with ID ${id} deleted.`);
+      getCocktailData()
+      setCocktailDeleted(true);
+      setSearchResults([]);
+    })
+    .catch((error) => {
+      console.error(`Error deleting cocktail with ID ${id}:`, error);
+    });
   }
 
 //   const toggleSpirit = (spiritName) => {
@@ -111,12 +128,13 @@ const RecipeCard = () => {
                 </li>
               ))}
             </ul> */}
-<div>
+<div className="flexSearch">
+    <label>Search by cocktail name, liquor, or ingredient</label>
           <input
             type="text"
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
-            placeholder="Search by liquor or ingredient"
+            placeholder="What are you looking for?"
             required
             />
           <button type="submit">Search</button>
@@ -143,28 +161,29 @@ const RecipeCard = () => {
                 <IngredientsList ingredients={recipe.ingredients} />
                 <CocktailDetails detailedCocktailRecipe={recipe} />
                 <CocktailMethod method={recipe.method} />
+                     <DeleteCocktail id={recipe.id} deleteCocktailData={deleteCocktailData} setSearchResults={setSearchResults}/>
               </div>
             ))}
           </div>
         )}
+
+{searchResults.length === 0 && searchMade && !noResultsFound && !cocktailDeleted && (
+  <div className="card">
+    <CocktailHeader title="Your Cocktail Was Not Found" image={emptyCocktailGlassImage} />
+  </div>
+)}
+
+      {/* Display "Your Cocktail Was Deleted" message and the empty cocktail glass image */}
+      {cocktailDeleted && searchResults.length === 0 && (
+        <div className="card">
+          <CocktailHeader title="Your Cocktail Has Been Deleted" image={emptyCocktailGlassImage} />
+        </div>
+      )}
+
+
       </div>
     </>
   );
 }
 
 export default RecipeCard;
-
-      {/* {data.map(recipe => (
-        <div className="card" key={recipe.id}>
-          <CocktailHeader title={recipe.cocktail_name} image={recipe.image_url} />
-          <IngredientsList ingredients={recipe.ingredients} />
-          {recipe && <CocktailDetails detailedCocktailRecipe={recipe} />}
-          <CocktailMethod method={recipe.method} />
-        </div>
-      ))}
-    </div>
-    </>
-  );
-}
-
-export default RecipeCard; */}

@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 
-const EditAlcohol = ({editAlcohols}) => {
+const EditAlcohol = ({editAlcohol}) => {
     const [alcohol, setAlcohol] = useState({
         id: "",
         alcohol_name: "",
@@ -10,7 +10,7 @@ const EditAlcohol = ({editAlcohols}) => {
 function handleSubmit(e) {
     e.preventDefault()
     // console.log(person)
-    editAlcohols(alcohol.id, alcohol)
+    editAlcohol(alcohol.id, alcohol)
 
     setAlcohol({
         id: "",

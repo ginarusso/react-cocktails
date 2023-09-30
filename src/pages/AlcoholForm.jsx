@@ -1,23 +1,40 @@
-import React, {useState} from 'react'
+import React, { useState, useEffect } from "react";
 import AddAlcohol from '../components/AddAlcohol'
+// import DeleteAlcohol from '../components/DeleteAlcohol'
+import apiConn from "../api/connect"
+import EditAlcohol from "../components/EditAlcohol";
 
 const AlcoholForm = () => {
-    // Define a function to add alcohols
-    const addAlcohols = (newAlcohol) => {
-      // Implement your logic to add alcohols here
-      console.log('Adding alcohol:', newAlcohol);
-    };
-  
+    const [data, setData] = useState([])
+    useEffect(() => {
+        getAlcoholData()
+      }, []);
+    function getAlcoholData(){
+        apiConn.get('/alcohol')
+        .then(res => {
+          setData(res.data)
+          console.log(res.data)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+      }
     return (
-      <>
-      <h2>Add Alcohol</h2>
-        {/* Pass the addAlcohols function as a prop */}
-        <AddAlcohol addAlcohols={addAlcohols} />
-      </>
-    );
-  }
-  
-  export default AlcoholForm;
+    <>
+    <h1>list of Alcohols</h1>
+{data.map(alcohol => {
+    return <div key={alcohol.id}>{alcohol.alcohol_name} {alcohol.id}</div>
+})}
+    <h2>Add Alcohol</h2>
+
+    <AddAlcohol />
+    {/* <EditAlcohol /> */}
+
+    </>
+  )
+}
+
+export default AlcoholForm;
   
   
   
