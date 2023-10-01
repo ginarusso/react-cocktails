@@ -10,6 +10,7 @@ import videoBG from "../images/bar_banner_vid.mp4";
 
 import apiConn from "../api/connect"
 import DeleteCocktail from "../components/DeleteCocktail";
+import EditCocktail from "../components/EditCocktail";
 
 const initialCocktailImage = "https://cdn.pixabay.com/photo/2014/03/24/17/07/pineapple-juice-295078_1280.png";
 const emptyCocktailGlassImage = "https://cdn.pixabay.com/photo/2014/12/12/22/08/glass-565914_1280.jpg";
@@ -23,6 +24,9 @@ const RecipeCard = () => {
   const [data, setData] = useState([])
   const [searchMade, setSearchMade] = useState(false);
   const [cocktailDeleted, setCocktailDeleted] = useState(false);
+  const [cocktailEdited, setCocktailEdited] = useState(false);
+  const [editSuccess, setEditSuccess] = useState(false);
+//   const [deleteSuccess, setDeleteSuccess] = useState(false)
 
 
   useEffect(() => {
@@ -31,7 +35,9 @@ const RecipeCard = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-  
+    console.log("Search triggered!")
+    setSearchMade(true);
+
     // Clean the search input
     const cleanSearchInput = searchInput.trim().toLowerCase();
 
@@ -43,29 +49,28 @@ function containsWholeWord(text, word) {
   }
   
 // Search logic
-const results = data.filter(recipe =>
-    recipe.ingredients.some(ingredient =>
-      containsWholeWord(ingredient.toLowerCase(), cleanSearchInput)
-    ) ||
-    containsWholeWord(recipe.cocktail_name.toLowerCase(), cleanSearchInput)
-  );
-  
-    setSearchResults(results);
-    setShowInitialImage(false);
-    // setNoResultsFound(results.length === 0);
-    setSearchInput('');
-    setSearchMade(true);
+const results = data.filter((recipe) => {
+    const ingredientsArray = Array.isArray(recipe.ingredients)
+      ? recipe.ingredients
+      : [];
 
-    setNoResultsFound(false)
-    // setNoResultsFound(results.length === 0); // Set noResultsFound to true if no results are found
+    return (
+      ingredientsArray.some((ingredient) =>
+        containsWholeWord(ingredient.toLowerCase(), cleanSearchInput)
+      ) ||
+      containsWholeWord(recipe.cocktail_name.toLowerCase(), cleanSearchInput)
+    );
+  });
 
-    if (results.length === 0) {
-      setShowInitialImage(true); // Set showInitialImage to true if no results are found
-    } else {
-      setShowInitialImage(false);
-    }
-    
-  };
+  setSearchResults(results);
+  console.log("Search results:", results);
+  setNoResultsFound(results.length === 0);
+  setShowInitialImage(results.length === 0);
+  setCocktailEdited(false);
+  setCocktailDeleted(false);
+//   setShowInitialImage(false);
+  setSearchInput('');
+};
 
   function getCocktailData(){
     apiConn.get('/cocktail')
@@ -91,6 +96,20 @@ const results = data.filter(recipe =>
     .catch((error) => {
       console.error(`Error deleting cocktail with ID ${id}:`, error);
     });
+  }
+
+  function editCocktail(id, info) {
+    apiConn.put(`/cocktail/${id}`, info)
+    .then(res => {
+        console.log(res)
+        getCocktailData()
+        // setCocktailEdited(true);
+        setEditSuccess(true);
+        setSearchResults([]);
+        })
+    .catch(error => {
+        console.log(error)
+    })
   }
 
 //   const toggleSpirit = (spiritName) => {
@@ -165,29 +184,42 @@ const results = data.filter(recipe =>
             {searchResults.map(recipe => (
               <div className="card" key={recipe.id}>
                 <CocktailHeader title={recipe.cocktail_name} image={recipe.image_url} />
+                <p>Cocktail ID: {recipe.id}</p>
                 <IngredientsList ingredients={recipe.ingredients} />
                 <CocktailDetails detailedCocktailRecipe={recipe} />
                 <CocktailMethod method={recipe.method} />
                 <DeleteCocktail id={recipe.id} deleteCocktailData={deleteCocktailData} setSearchResults={setSearchResults} />
+                <EditCocktail editCocktail={editCocktail} id={recipe.id}/>
 
               </div>
             ))}
           </div>
         )}
+      {editSuccess && ( // Display edit success message when editSuccess is true
+        <div className="card">
+          <CocktailHeader
+            title="Your Cocktail Has Been Edited"
+            image={initialCocktailImage}
+          />
+        </div>
+      )}
+      {searchResults.length === 0 && searchMade && !noResultsFound && !cocktailDeleted && !editSuccess && (
 
-{searchResults.length === 0 && searchMade && !noResultsFound && !cocktailDeleted && (
   <div className="card">
     <CocktailHeader title="Your Cocktail Was Not Found" image={emptyCocktailGlassImage} />
   </div>
 )}
-
+      {/* {cocktailEdited && (
+        <div className="card">
+          <CocktailHeader title="Your Cocktail Has Been Edited" image={initialCocktailImage} />
+        </div>
+      )} */}
       {/* Display "Your Cocktail Was Deleted" message and the empty cocktail glass image */}
-      {cocktailDeleted && searchResults.length === 0 && (
+      {cocktailDeleted && searchResults.length === 0 && !cocktailEdited && (
         <div className="card">
           <CocktailHeader title="Your Cocktail Has Been Deleted" image={emptyCocktailGlassImage} />
         </div>
       )}
-
 
       </div>
     </>

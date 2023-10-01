@@ -1,6 +1,6 @@
 import React from "react";
 
-const CocktailHeader = ({ title, image }) => {
+const CocktailHeader = ({ title, image, id }) => {
   return (
     <div className="center">
       <h2>{title}</h2>

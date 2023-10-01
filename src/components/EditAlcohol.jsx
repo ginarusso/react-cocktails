@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
+import '../styles/addCocktail.css'
 
-const EditAlcohol = ({editAlcohol}) => {
+const EditAlcohol = ({editAlcoholById}) => {
     const [alcohol, setAlcohol] = useState({
         id: "",
         alcohol_name: "",
@@ -9,8 +10,8 @@ const EditAlcohol = ({editAlcohol}) => {
 
 function handleSubmit(e) {
     e.preventDefault()
-    // console.log(person)
-    editAlcohol(alcohol.id, alcohol)
+    editAlcoholById(alcohol.id, alcohol)
+    console.log(alcohol)
 
     setAlcohol({
         id: "",
@@ -21,8 +22,7 @@ function handleSubmit(e) {
 
   return (
     <>
-        <hr />
-<h2>Component to edit alcohol</h2>
+<h2>Edit Alcohol</h2>
 
     <form onSubmit={handleSubmit}> 
 
@@ -56,7 +56,6 @@ function handleSubmit(e) {
     />
 <button>Edit Alcohol</button>
     </form>
-    <hr />
     </>
   )
 }

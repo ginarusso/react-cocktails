@@ -38,8 +38,10 @@ h1 {
   }
   
  .alcohol-list {
-    padding: .2em;
+    padding: .5em;
     font-size: .8em;
+    background-color: maroon;
+    color: white;
   }
 
   button {

@@ -18,6 +18,10 @@ async function handleOnSubmit(e) {
         apiConn.post('/alcohol', alcohol)
         .then(res => {
             console.log(res)
+            if (res.status === 201) {
+                console.log("Calling addAlcohols")
+                addAlcohols(); // Call the callback to trigger the message display
+            }
         })
         .catch(error => {
             console.log(error)

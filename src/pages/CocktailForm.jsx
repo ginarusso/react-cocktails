@@ -55,7 +55,7 @@ const CocktailForm = () => {
 <div className="flex">
 {alcoholArr.map(alcohol => (
   <div key={alcohol.id} className="alcohol-list">
-    {alcohol.alcohol_name} ID: {alcohol.id}
+    {alcohol.alcohol_name} id: {alcohol.id}
   </div>
 ))}
 </div>

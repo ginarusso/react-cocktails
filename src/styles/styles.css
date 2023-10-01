@@ -188,7 +188,7 @@ span {
 /* } */
 
 p {
-margin: .5em;
+margin: 1em;
 }
 
 .center {
@@ -244,6 +244,10 @@ flex-direction: column;
 .ingredients {
 grid-column: 1 / span 1;
 grid-row: 1;
+}
+
+.method {
+  padding-right: 1em;
 }
 
 .recipeImg {

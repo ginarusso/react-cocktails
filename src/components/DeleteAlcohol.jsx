@@ -1,17 +1,25 @@
-import React from 'react'
-// import apiConn from "../api/connect"
+import React, { useState } from 'react';
 
-const DeleteAlcohol = ({ id, deleteAlcoholData, setSearchResults }) => {
-    function handleDelete() {
-      deleteAlcoholData(id);
-       console.log(id)
-      setSearchResults([])
-    }
-  
-    return (
-      <button onClick={handleDelete}>Delete Alcohol</button>
-    );
+const DeleteAlcohol = ({ deleteAlcoholData }) => {
+  const [id, setId] = useState('');
+
+  const handleDelete = () => {
+    deleteAlcoholData(id);
+    setId(''); // Clear the input field after deletion
   };
-  
-  export default DeleteAlcohol;
-  
+
+  return (
+    <div>
+        <h2>Delete an Alcohol</h2>
+      <input
+        type="text"
+        placeholder="Enter ID"
+        value={id}
+        onChange={(e) => setId(e.target.value)}
+      />
+      <button onClick={handleDelete}>Delete Alcohol</button>
+    </div>
+  );
+};
+
+export default DeleteAlcohol;
