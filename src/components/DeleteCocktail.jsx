@@ -11,7 +11,10 @@ const DeleteCocktail = ({id, deleteCocktailData, setSearchResults}) => {
       }
 
       return (
+        <>
+        
         <button onClick={handleDelete}>Delete Cocktail</button>
+        </>
       );
     };
 

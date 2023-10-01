@@ -43,8 +43,12 @@ input, button {
   text-align: center;
   margin-left: 1em;
   font-weight: bold;
-  color: gray;
+  color: white;
   width: 200px;
+}
+input {
+    opacity: .5;
+    color: black;
 }
 
 label {
@@ -298,8 +302,12 @@ footer {
     text-align: center;
     /* margin: 1em; */
     font-weight: bold;
-    color: gray;
+    color: #fff;
     /* width: 90%; */
+  }
+
+  input {
+    color: black;
   }
 
   /* button {

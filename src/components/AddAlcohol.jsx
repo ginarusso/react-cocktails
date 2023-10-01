@@ -30,6 +30,7 @@ async function handleOnSubmit(e) {
 
 return (
     <>
+    <h2>Add an Alcohol</h2>
     <form onSubmit={handleOnSubmit}>
         <input type="text"
         placeholder="Alcohol Name"
@@ -44,8 +45,7 @@ return (
                 return {...previousAlcohol, brand: e.target.value}
             })
         }}
-        required
-        />
+        required />
         <button>Add Alcohol</button>
     </form>
     </>

@@ -34,14 +34,21 @@ const RecipeCard = () => {
   
     // Clean the search input
     const cleanSearchInput = searchInput.trim().toLowerCase();
+
+
+    // Helper function to check if a string contains the search term as a whole word (without this if you search for gin, anything with ginger is also returned)
+function containsWholeWord(text, word) {
+    const wordPattern = new RegExp(`\\b${word}\\b`, 'i');
+    return wordPattern.test(text);
+  }
   
-    // search logic
-    const results = data.filter(recipe =>
-        recipe.ingredients.some(ingredient =>
-          ingredient.toLowerCase().includes(cleanSearchInput)
-        ) ||
-        recipe.cocktail_name.toLowerCase().includes(cleanSearchInput) // Search for cocktail name
-      );
+// Search logic
+const results = data.filter(recipe =>
+    recipe.ingredients.some(ingredient =>
+      containsWholeWord(ingredient.toLowerCase(), cleanSearchInput)
+    ) ||
+    containsWholeWord(recipe.cocktail_name.toLowerCase(), cleanSearchInput)
+  );
   
     setSearchResults(results);
     setShowInitialImage(false);
@@ -161,7 +168,8 @@ const RecipeCard = () => {
                 <IngredientsList ingredients={recipe.ingredients} />
                 <CocktailDetails detailedCocktailRecipe={recipe} />
                 <CocktailMethod method={recipe.method} />
-                     <DeleteCocktail id={recipe.id} deleteCocktailData={deleteCocktailData} setSearchResults={setSearchResults}/>
+                <DeleteCocktail id={recipe.id} deleteCocktailData={deleteCocktailData} setSearchResults={setSearchResults} />
+
               </div>
             ))}
           </div>
