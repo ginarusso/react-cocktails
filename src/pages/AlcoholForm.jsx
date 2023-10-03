@@ -14,6 +14,8 @@ const AlcoholForm = () => {
     const [alcoholDeleted, setAlcoholDeleted] = useState(false);
     const [alcoholAdded, setAlcoholAdded] = useState(false); // Step 3
     const [alcoholEdited, setAlcoholEdited] = useState(false);
+    // const [editingAlcoholId, setEditingAlcoholId] = useState(null);
+
     useEffect(() => {
         // getCocktailData()
         getAlcoholData();
@@ -42,7 +44,10 @@ const AlcoholForm = () => {
         .then(res => {
           console.log(`Alcohol with ID ${alcoholId} deleted.`);
           getAlcoholData();
-          setAlcoholDeleted(true);
+          setAlcoholAdded(false);
+          setAlcoholEdited(false);
+          setAlcoholDeleted(true)
+        //   setEditingAlcoholId(null);
         })
         .catch((error) => {
           console.error(`Error deleting alcohol with ID ${alcoholId}:`, error);
@@ -63,6 +68,9 @@ const AlcoholForm = () => {
             console.log(`Alcohol with ID ${alcoholId} edited.`);
             getAlcoholData();
             setAlcoholEdited(true);
+            setAlcoholAdded(false);
+            setAlcoholDeleted(false)
+            // setEditingAlcoholId(null);
         })
         .catch((error) => {
             console.error(`Error editing alcohol with ID ${alcoholId}:`, error);
@@ -70,20 +78,23 @@ const AlcoholForm = () => {
     }
 
 
-      function getAlcoholData(){
-        apiConn.get('/alcohol')
+    //   function getAlcoholData(){
+    //     apiConn.get('/alcohol')
     
-        .then(res => {
-          setData(res.data)
-          console.log(res.data)
-        })
-        .catch(error => {
-          console.log(error)
-        })
-      }
+    //     .then(res => {
+    //       setData(res.data)
+    //       console.log(res.data)
+    //     })
+    //     .catch(error => {
+    //       console.log(error)
+    //     })
+    //   }
       
       const handleAlcoholAdded = () => {
         setAlcoholAdded(true);
+        setAlcoholEdited(false);
+        setAlcoholDeleted(false)
+        // setEditingAlcoholId(null);
         getAlcoholData();
         console.log("add image")
       };
@@ -99,27 +110,46 @@ const AlcoholForm = () => {
   {data.map(alcohol => {
     return (
       <div className="alcohol-list" key={alcohol.id}>
-        {alcohol.alcohol_name}  <br />{alcohol.brand} <br />id: {alcohol.id}
+       <p> {alcohol.alcohol_name}  <br />{alcohol.brand} <br />id: {alcohol.id}</p>
       </div>
     );
   })}
 </div>
 
-{alcoholAdded && ( // Step 3: Display the message and image
-          <div className="card">
-            <CocktailHeader title="Your Alcohol Has Been Added" image={initialCocktailImage} />
-          </div>
-        )}
-
-    <AddAlcohol addAlcohols={handleAlcoholAdded} />
-    <div className="delete-alcohol-container">
-            <DeleteAlcohol deleteAlcoholData={deleteAlcoholById} />
-            <EditAlcohol editAlcoholById={editAlcoholById} />
-            </div>
-            
+{alcoholAdded && (
+                <div className="card">
+                    <CocktailHeader
+                        title="Your Alcohol Has Been Added"
+                        image={initialCocktailImage} // Replace with the URL of your empty bottle image
+                    />
+                </div>
+            )}
+                    {alcoholEdited && (
+                        <div className="card">
+                            <CocktailHeader
+                                title="Your Alcohol Has Been Edited"
+                                image={initialCocktailImage} // Replace with the URL of your success image
+                            />
+                        </div>
+                    )}
+                                {alcoholDeleted && (
+                <div className="card">
+                    <CocktailHeader
+                        title="Your Alcohol Has Been Deleted"
+                        image={initialCocktailImage}
+                    />
+                </div>
+            )}
+               
+                        <AddAlcohol addAlcohols={handleAlcoholAdded} />
+                    <div className="delete-alcohol-container">
+                        <DeleteAlcohol deleteAlcoholData={deleteAlcoholById} />
+                        <EditAlcohol editAlcoholById={editAlcoholById} />
+                    </div>
         </>
-    )
+    );
 }
+
 
 export default AlcoholForm;
   

@@ -1,20 +1,47 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import '../styles/addCocktail.css'
+import apiConn from "../api/connect"
 
-const EditCocktail = ({editCocktail}) => {
+const EditCocktail = ({editCocktail, currentCocktail}) => {
+    const [alcoholArr, setAlcoholArr] = useState([]);
+    const [data, setData] = useState([])
     const [cocktail, setCocktail] = useState({
-        id: "",
-        cocktail_name: "",
-        difficulty: "",
-        portion: "",
-        time: "",
-        description: "",
-        category: "",
-        ingredients: [],
-        method: [],
-        image_url: "",
-        alcohol_id: ""
+        id: currentCocktail.id,
+        cocktail_name: currentCocktail.cocktail_name,
+        difficulty: currentCocktail.difficulty,
+        portion: currentCocktail.portion,
+        time: currentCocktail.time,
+        description: currentCocktail.description,
+        category: currentCocktail.category,
+        ingredients: currentCocktail.ingredients,
+        method: currentCocktail.method,
+        image_url: currentCocktail.image_url,
+        alcohol_id: currentCocktail.alcohol_id
     })
+
+    useEffect(() => {
+        getAlcoholData();
+        if (currentCocktail.id) {
+            apiConn.get(`/cocktail/${currentCocktail.id}`)
+                .then((res) => {
+                    setCocktail(res.data);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
+    }, [currentCocktail.id]);
+
+      function getAlcoholData() {
+        apiConn.get('/alcohol')
+          .then(res => {
+            setAlcoholArr(res.data);
+            console.log(res.data);
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      }
 
 function handleSubmit(e) {
     e.preventDefault()
@@ -54,6 +81,14 @@ const handleArrayChange = (e, fieldName) => {
   return (
     <>
     <h2>Edit this cocktail</h2>
+    <h4>List of Alcohols</h4>
+<div className="flex">
+{alcoholArr.map(alcohol => (
+  <div key={alcohol.id} className="alcohol-list">
+    {alcohol.alcohol_name} id: {alcohol.id}
+  </div>
+))}
+</div>
     <form onSubmit={handleSubmit} className="form-grid">
     <div className="form-item">
     <label>Cocktail ID:</label>
@@ -65,7 +100,7 @@ const handleArrayChange = (e, fieldName) => {
             return {...previousCocktail, id: e.target.value}
         })
     }}
-    required
+    disabled
     />
 </div>
 

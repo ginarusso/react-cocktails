@@ -33,6 +33,10 @@ const RecipeCard = () => {
     getCocktailData()
   }, []);
 
+  function resetEditSuccess() {
+    setEditSuccess(false);
+  }
+
   const handleSearch = (e) => {
     e.preventDefault();
     console.log("Search triggered!")
@@ -101,12 +105,13 @@ const results = data.filter((recipe) => {
   function editCocktail(id, info) {
     apiConn.put(`/cocktail/${id}`, info)
     .then(res => {
-        console.log(res)
+        console.log("Edit response: ",res)
         getCocktailData()
         // setCocktailEdited(true);
         setEditSuccess(true);
-        setSearchResults([]);
-        })
+        // setSearchResults([]);
+        setTimeout(resetEditSuccess, 3000);
+    })
     .catch(error => {
         console.log(error)
     })
@@ -189,7 +194,7 @@ const results = data.filter((recipe) => {
                 <CocktailDetails detailedCocktailRecipe={recipe} />
                 <CocktailMethod method={recipe.method} />
                 <DeleteCocktail id={recipe.id} deleteCocktailData={deleteCocktailData} setSearchResults={setSearchResults} />
-                <EditCocktail editCocktail={editCocktail} id={recipe.id}/>
+                <EditCocktail editCocktail={editCocktail} id={recipe.id} currentCocktail={recipe}/>
 
               </div>
             ))}
